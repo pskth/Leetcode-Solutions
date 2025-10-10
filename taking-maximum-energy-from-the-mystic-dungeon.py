@@ -1,5 +1,9 @@
 class Solution:
     def maximumEnergy(self, energy: List[int], k: int) -> int:
+        '''
+        This solution is slower than other available dp solution.
+        Check about stride and CPU Branch Prediction to know about this.
+        '''
         prefixSum = []
         ans = -(math.inf)
 
