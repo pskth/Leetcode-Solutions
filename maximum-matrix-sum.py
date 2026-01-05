@@ -1,27 +1,22 @@
 class Solution:
     def maxMatrixSum(self, matrix: List[List[int]]) -> int:
-    '''
-        Observation and spending quality time on the problem is key!
-        By taking examples manually, we observe that multiplying by -1 is just passing around
-        -ve sign to adjacent elements or destroying -ve if 2 -ve signs meet. Any 2 -ve signs
-        even if they are far apart can be passed around and destroy.
-        So, if number of negative elements is ODD:
-            1 -ve sign will remain and it can be passed to the least abs(number).
-        if number of negative elements is EVEN:
-            all -ve signs will be destroyed
-
-    '''
-        minEle = float('inf')
-        n = 0
-        sumMatrix = 0
-        for row in matrix:
-            for ele in row:
-                if ele < 0:
-                    n += 1
-                minEle = min(minEle, abs(ele))
-                sumMatrix += abs(ele) 
+        neg_count, tot = 0, 0
+        abs_min = math.inf
+        zero_present = False
         
-        if n % 2:
-            return sumMatrix - 2 * minEle
+        for row in matrix:
+            for num in row:
+                tot += abs(num)
+                abs_min = min(abs_min, abs(num))
+                if num < 0:
+                    neg_count += 1
+                elif num == 0:
+                    zero_present = True
+
+
+        # print(f'{tot=}, {abs_min=}')
+        if not zero_present and neg_count > 0 and neg_count % 2:
+            return tot - 2*abs_min
         else:
-            return sumMatrix
+            return tot
+         
