@@ -1,4 +1,37 @@
 class Solution:
+    def rotateTheBox(self, boxGrid: List[List[str]]) -> List[List[str]]:
+        """
+        Intital thought: in each row start from end have a 2 pointer type of approach
+        Here: the 2 pointers are 1) [i][j] 2) free
+
+        Start from the right end in each row, if its a obstacle, directly set free to j - 1
+        if its a stone move it to free and set that position as empty.
+        """
+        m, n = len(boxGrid), len(boxGrid[0])
+        free = n - 1
+        
+        for i in range(m):
+            free = n - 1
+            for j in range(n - 1 , -1 , -1):
+                if boxGrid[i][j] == '*':
+                    free = j - 1
+                elif boxGrid[i][j] == '#':
+                    boxGrid[i][j] = '.'
+                    boxGrid[i][free] = '#'
+                    free -= 1
+
+        res = [['.' for _ in range(m)] for _ in range(n)]
+
+        for i in range(m):
+            for j in range(n):
+                res[j][i] = boxGrid[i][j]
+
+        for row in res:
+            row.reverse()
+
+        return res
+        
+class Solution:
     def rotateTheBox(self, box: List[List[str]]) -> List[List[str]]:
     '''
         Simulation:
