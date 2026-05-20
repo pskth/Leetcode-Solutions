@@ -1,5 +1,23 @@
 class Solution:
     def findThePrefixCommonArray(self, A: List[int], B: List[int]) -> List[int]:
+        seen = set()
+        n = len(A)
+        res = [0] * n
+        
+        for i in range(n):
+            prev_len = len(seen)
+            seen.add(A[i])
+            seen.add(B[i])
+            cur_len = len(seen)
+            
+            res[i] = res[i - 1] + (2 - (cur_len - prev_len))
+
+        return res
+
+
+"""
+class Solution:
+    def findThePrefixCommonArray(self, A: List[int], B: List[int]) -> List[int]:
         seen_A = set()
         seen_B = set()
         n = len(A)
@@ -20,3 +38,4 @@ class Solution:
             prev = C[i]
 
         return C
+"""
