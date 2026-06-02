@@ -22,18 +22,26 @@ class Solution:
 
         mp = defaultdict(int)
         res = 0
-
+        """
+        num not in mp is True
+        but if statement does not execute
+        """
         for num in nums:
-            if not mp[num]: 
-                print(f"not mp[num]:  {num=}")
+            print(num not in mp)
+            print(not mp[num])
+            print(num, mp[num])
+            print()
             if num not in mp:
-                print(f"num not in mp:  {num=}")
-            if not mp[num]:
+                print(mp[num])
                 mp[num] = mp[num + 1] + mp[num - 1] + 1
+                print(mp[num])
                 mp[num - mp[num - 1]] = mp[num]
                 mp[num + mp[num + 1]] = mp[num]
                 res = max(res, mp[num])
-        
+
+            # if num == 4:
+            #     print(mp)
+    
         return res
 
 
